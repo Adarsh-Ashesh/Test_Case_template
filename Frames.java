@@ -24,27 +24,27 @@ public class Frames {
 		System.out.println("Current Title : " + driver.getTitle());
 		
 		driver.switchTo().frame("frame-top");
-		driver.switchTo().frame(0);
+		driver.switchTo().frame("frame-left");
 		
-		WebElement leftFrame = driver.findElement(By.xpath("//frame[@name='frame-left']"));
+		WebElement leftFrame = driver.findElement(By.xpath("/html/body"));
 		System.out.println("Text written in left frame is : " + leftFrame.getText());
-		driver.switchTo().defaultContent();
+		driver.switchTo().parentFrame();
 		
-		driver.switchTo().frame(1);
+		driver.switchTo().frame("frame-middle");
 		
-		WebElement middleFrame = driver.findElement(By.xpath("//frame[@name='frame-middle']"));
+		WebElement middleFrame = driver.findElement(By.xpath("//*[@id=\"content\"]"));
 		System.out.println("Text written in middle frame is : " + middleFrame.getText());
 		driver.switchTo().parentFrame();
 		
-		driver.switchTo().frame(2);
+		driver.switchTo().frame("frame-right");
 		
-		WebElement rightFrame = driver.findElement(By.xpath("//frame[@name='frame-right']"));
+		WebElement rightFrame = driver.findElement(By.xpath("/html/body"));
 		System.out.println("Text written in right frame is : " + rightFrame.getText());
-		driver.switchTo().parentFrame();
+		driver.switchTo().defaultContent();
 		
 		driver.switchTo().frame("frame-bottom");
 		
-		WebElement bottomFrame = driver.findElement(By.xpath("//frame[@name='frame-bottom']"));
+		WebElement bottomFrame = driver.findElement(By.xpath("/html/body"));
 		System.out.println("Text written in bottom frame is : " + bottomFrame.getText());
 		driver.switchTo().parentFrame();
 			
