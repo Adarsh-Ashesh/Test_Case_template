@@ -5,6 +5,8 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Set;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,14 +32,23 @@ WebDriver driver = new ChromeDriver();
 		button.click();
 		
 		Set<String> windowids = driver.getWindowHandles();
-		ArrayList windowidsList = new ArrayList(windowids);
-		Object parentWindowId = windowidsList.get(0);
-		Object childWindowId = windowidsList.get(0);
+		//List<String> windowidsList = new ArrayList(windowids);
+		java.util.Iterator<String> it = windowids.iterator();
 		
-		driver.switchTo().newWindow((WindowType) childWindowId);
+		String parentWindowId = it.next();
+		String childWindowId =  it.next();
 		
-		System.out.println("Current URL2 : " + driver.getCurrentUrl());
-		System.out.println("Current Title2 : " + driver.getTitle());
+		System.out.println("Parent : " + parentWindowId);
+		System.out.println("Child : " + childWindowId);
+		
+		
+		
+		driver.switchTo().window(childWindowId);
+		Thread.sleep(4000);
+		driver.switchTo().window(parentWindowId);
+		
+		Thread.sleep(4000);
+		driver.close();
 
 	}
 
